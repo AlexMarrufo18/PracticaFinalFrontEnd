@@ -1,0 +1,81 @@
+<div class="container">
+    <button (click)='showPacientes()' class="btn"> 
+        {{estadoPacientes ? 'Ocultar Pacientes': 'Pacientes'}}
+    </button>
+    <div *ngIf='estadoPacientes'>
+        <h5><strong>{{titulo}}</strong></h5>
+
+        <div class="row">
+            <div class="col s5">
+                <div class="card">
+                    <div class="card-content">
+                        <form #pacienteForm="ngForm" (ngSubmit)="addPaciente(pacienteForm)">
+                            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="paciente._id">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for=""><strong>Nombre</strong></label>
+                                    <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="paciente.nombre" placeholder="Ingrese Nombre">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><strong>Apellido</strong></label>
+                                    <input type="text" name="apellido" #apellido="ngModel" [(ngModel)]="paciente.apellido" placeholder="Ingrese apellido">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><strong>Fecha de Nacimiento</strong></label>
+                                    <input type="text" name="fecha_nacimiento" #fecha_nacimiento="ngModel" [(ngModel)]="paciente.fecha_nacimiento" placeholder="Ingrese Fecha de Nacimiento">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><strong>Dirección</strong></label>
+                                    <input type="text" name="direccion" #direccion="ngModel" [(ngModel)]="paciente.direccion" placeholder="Ingrese Dirección">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><strong>Edad</strong></label>
+                                    <input type="text" name="edad" #edad="ngModel" [(ngModel)]="paciente.edad" placeholder="Ingrese edad">
+                                </div>
+                                <div class="card-action">
+                                    <div class="input-field col s12">
+                                        <button class="btn left">Guardar</button>
+                                        <button class="btn right" (click)="nuevoForm(pacienteForm)">Nuevo</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col s7">
+                <table class="highlight">
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Dirección</th>
+                        <th>Edad</th>
+                        <th>Operaciones</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let paciente of pacientes">
+                            <td>{{paciente.nombre}}</td>
+                            <td>{{paciente.apellido}}</td>
+                            <td>{{paciente.fecha_nacimiento}}</td>
+                            <td>{{paciente.direccion}}</td>
+                            <td>{{paciente.edad}}</td>
+                            <td>
+                                <button> <a (click)="editPaciente(paciente)">
+                                    <i class="material-icons">edit</i>
+                                    </a>
+                                </button>
+                                <button>
+                                    <a (click)="deletePaciente(paciente._id)">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+    <button (click)='showMedicos()' class="btn"> 
+        {{estadoMedicos ? 'Ocultar Medicos': 'Médicos'}}
+    </button>
+    <div *ngIf='estadoMedicos'>
+        <h5><strong>{{titulo}}</strong></h5>
+
+        <div class="row">
+            <div class="col s5">
+                <div class="card">
+                    <div class="card-content">
+                        <form #medicoForm="ngForm" (ngSubmit)="addMedico(medicoForm)">
+                            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="medico._id">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for=""><Strong>Nombre</Strong></label>
+                                    <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="medico.nombre" placeholder="Ingrese Nombre">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><Strong>Apellido</Strong></label>
+                                    <input type="text" name="apellido" #apellido="ngModel" [(ngModel)]="medico.apellido" placeholder="Ingrese Apellido">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><Strong>Especialidad</Strong></label>
+                                    <input type="text" name="especialidad" #especialidad="ngModel" [(ngModel)]="medico.especialidad" placeholder="Ingrese Especialidad">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><Strong>Correo Electrónico</Strong></label>
+                                    <input type="text" name="email" #email="ngModel" [(ngModel)]="medico.email" placeholder="Ingrese email">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><Strong>Celular</Strong></label>
+                                    <input type="text" name="celular" #celular="ngModel" [(ngModel)]="medico.celular" placeholder="Ingrese Celular">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for=""><Strong>Dirección</Strong></label>
+                                    <input type="text" name="direccion" #direccion="ngModel" [(ngModel)]="medico.direccion" placeholder="Ingrese Direciión">
+                                </div>
+                                <div class="card-action">
+                                    <div class="input-field col s12">
+                                        <button class="btn left">Guardar</button>
+                                        <button class="btn right" (click)="nuevoForm(medicoForm)">Nuevo</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col s7">
+                <table class="striped">
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Especialidad</th>
+                        <th>Correo Electronico</th>
+                        <th>Celular</th>
+                        <th>Dirección</th>
+                        <th>Operaciones</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medico of medicos">
+                            <td>{{medico.nombre}}</td>
+                            <td>{{medico.apellido}}</td>
+                            <td>{{medico.especialidad}}</td>
+                            <td>{{medico.email}}</td>
+                            <td>{{medico.celular}}</td>
+                            <td>{{medico.direccion}}</td>
+                            <td>
+                                <button> <a (click)="editMedico(medico)">
+                                    <i class="material-icons">edit</i>
+                                    </a>
+                                </button>
+                                <button>
+                                    <a (click)="deleteMedico(medico._id)">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
